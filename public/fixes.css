@@ -232,7 +232,7 @@ body.menu-detail-open{overflow:hidden}
   transition:bottom .18s ease,transform .2s ease;
 }
 
-/* 6) Standard copyright line at the very bottom of the footer. */
+/* 6) Copyright stays on its own bottom row, aligned right only. */
 footer::after{
   content:"© 2026 Smalltalk Coffee & Chill. All rights reserved.";
   grid-column:1 / -1;
@@ -245,6 +245,7 @@ footer::after{
   line-height:1.5;
   letter-spacing:.08em;
   text-transform:uppercase;
+  text-align:right;
 }
 
 @media(max-width:720px){
@@ -271,6 +272,7 @@ footer::after{
     padding-top:16px;
     font-size:7px;
     letter-spacing:.06em;
+    text-align:right;
   }
 }
 
