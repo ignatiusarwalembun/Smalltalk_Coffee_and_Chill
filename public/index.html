@@ -18,6 +18,7 @@
     (()=>{try{const s=localStorage.getItem('smalltalk-theme');const d=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=s||(d?'dark':'light')}catch(e){}})();
   </script>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/menu.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Smalltalk Coffee and Chill","telephone":"+6285117828229","priceRange":"Rp 1–25,000","address":{"@type":"PostalAddress","streetAddress":"Jl. Pademangan 3 Raya No.6C, RT.18/RW.2","addressLocality":"Jakarta Utara","addressRegion":"DKI Jakarta","postalCode":"14410","addressCountry":"ID"},"openingHours":"Mo-Su 09:30-23:00","sameAs":["https://www.instagram.com/smalltalkcoffeechill/"]}
   </script>
@@ -136,15 +137,55 @@
           <h2><span data-i18n="menu.titleA">Something for</span><br><em data-i18n="menu.titleEm">every kind of pause.</em></h2>
         </div>
         <div class="menu-intro__copy" data-reveal data-delay="80">
-          <p data-i18n="menu.note">Smalltalk serves coffee, non-coffee drinks, and café bites. For current items and prices, ask the café directly.</p>
+          <p>Menu Smalltalk Coffee & Chill — coffee, milk based, non coffee, dan snacks & bites.</p>
           <a class="text-link text-link--inverse" id="latestMenuLink" href="https://wa.me/6285117828229?text=Halo%20Smalltalk%2C%20boleh%20minta%20menu%20terbaru%3F" target="_blank" rel="noreferrer"><span data-i18n="menu.ask">Ask for the latest menu</span><b>↗</b></a>
         </div>
       </div>
-      <div class="menu-categories">
-        <article data-reveal><span>01</span><div><small data-i18n="menu.coffeeLabel">COFFEE</small><h3 data-i18n="menu.coffeeTitle">Coffee</h3><p data-i18n="menu.coffeeText">For the everyday cup, iced break, or slower sit-down.</p></div><b>↗</b></article>
-        <article data-reveal data-delay="70"><span>02</span><div><small data-i18n="menu.nonCoffeeLabel">NON COFFEE</small><h3 data-i18n="menu.nonCoffeeTitle">Non-coffee</h3><p data-i18n="menu.nonCoffeeText">A softer option when coffee is not the mood.</p></div><b>↗</b></article>
-        <article data-reveal data-delay="140"><span>03</span><div><small data-i18n="menu.bitesLabel">CAFÉ BITES</small><h3 data-i18n="menu.bitesTitle">Bites</h3><p data-i18n="menu.bitesText">Something small to keep the conversation going.</p></div><b>↗</b></article>
+
+      <div class="menu-catalog">
+        <section class="menu-group" data-reveal>
+          <div class="menu-group__head"><div><span>01</span><h3>Looking for Coffee?</h3></div><small>COFFEE</small></div>
+          <div class="menu-grid">
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=900&q=82" alt="Espresso visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>ESPRESSO</h4><strong class="menu-card__price">12K</strong></div></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?auto=format&fit=crop&w=900&q=82" alt="Americano visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>AMERICANO</h4><strong class="menu-card__price">15K</strong></div></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=82" alt="Lemonricano visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>LEMONRICANO</h4><strong class="menu-card__price">18K</strong></div></div></article>
+          </div>
+        </section>
+
+        <section class="menu-group" data-reveal>
+          <div class="menu-group__head"><div><span>02</span><h3>Milk Based</h3></div><small>MILK BASED</small></div>
+          <div class="menu-grid">
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=82" alt="Smalltalk Aren visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">MILK BASED</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>SMALLTALK AREN</h4><strong class="menu-card__price">18K</strong></div></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=82" alt="Smalltalk Salted visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">MILK BASED</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>SMALLTALK SALTED</h4><strong class="menu-card__price">20K</strong></div></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=900&q=82" alt="Caffe Latte visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">MILK BASED</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>CAFFÈ LATTE</h4><strong class="menu-card__price">20K</strong></div></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1461988091159-192b6df7054f?auto=format&fit=crop&w=900&q=82" alt="Vanilla Latte visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">MILK BASED</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>VANILLA LATTE</h4><strong class="menu-card__price">20K</strong></div></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=82" alt="Hazelnut Latte visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">MILK BASED</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>HAZELNUT LATTE</h4><strong class="menu-card__price">20K</strong></div></div></article>
+          </div>
+        </section>
+
+        <section class="menu-group" data-reveal>
+          <div class="menu-group__head"><div><span>03</span><h3>Non Coffee</h3></div><small>NON COFFEE</small></div>
+          <div class="menu-grid">
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=82" alt="Chocolate drink visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">NON COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>CHOCOLATE</h4><strong class="menu-card__price">20K</strong></div><p>Thick and smooth chocolate drink served cold with ice.</p></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=82" alt="Matcha Latte visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">NON COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>MATCHA LATTE</h4><strong class="menu-card__price">20K</strong></div><p>Made from Pure Matcha Powder.</p></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=82" alt="Iced Lemon Tea visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">NON COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>ICED LEMON TEA</h4><strong class="menu-card__price">16K</strong></div><p>A simple and refreshing mix of brewed tea and fresh lemon.</p></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=82" alt="Lychee Tea visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">NON COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>LYCHEE TEA</h4><strong class="menu-card__price">18K</strong></div><p>Brewed tea sweetened with lychee syrup.</p></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=82" alt="Cookies and Cream visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">NON COFFEE</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>COOKIES &amp; CREAM</h4><strong class="menu-card__price">22K</strong></div><p>A creamy blend of milk and crushed cookies.</p></div></article>
+          </div>
+        </section>
+
+        <section class="menu-group" data-reveal>
+          <div class="menu-group__head"><div><span>04</span><h3>Snacks &amp; Bites</h3></div><small>SNACKS &amp; BITES</small></div>
+          <div class="menu-grid">
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=82" alt="French Fries visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">SNACKS</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>FRENCH FRIES</h4><strong class="menu-card__price">15K</strong></div><p>Classic french fries.</p></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=900&q=82" alt="Mix Plate visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">SNACKS</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>MIX PLATE</h4><strong class="menu-card__price">25K</strong></div><p>Chicken nugget, french fries, and sausage.</p></div></article>
+            <article class="menu-card"><div class="menu-card__image"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=82" alt="Cireng visual placeholder" loading="lazy" decoding="async"><span class="menu-card__category">SNACKS</span></div><div class="menu-card__body"><div class="menu-card__top"><h4>CIRENG</h4><strong class="menu-card__price">12K</strong></div><p>Chewy, crispy Indonesia tapioca fritters.</p></div></article>
+          </div>
+        </section>
+
+        <div class="menu-seasonal" data-reveal><div><small>SMALLTALK</small><strong>SEASONAL MENU</strong></div><span>↗</span></div>
       </div>
+      <p class="menu-hours">BREWING START FROM 9.30 AM - 11.00 PM</p>
     </section>
 
     <section class="moments section" id="moments">
