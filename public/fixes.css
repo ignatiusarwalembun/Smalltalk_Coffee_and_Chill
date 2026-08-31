@@ -232,6 +232,21 @@ body.menu-detail-open{overflow:hidden}
   transition:bottom .18s ease,transform .2s ease;
 }
 
+/* 6) Standard copyright line at the very bottom of the footer. */
+footer::after{
+  content:"© 2026 Smalltalk Coffee & Chill. All rights reserved.";
+  grid-column:1 / -1;
+  width:100%;
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.5;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
 @media(max-width:720px){
   .hero__social{
     left:10px;
@@ -250,6 +265,12 @@ body.menu-detail-open{overflow:hidden}
     max-width:100%;
     font-size:clamp(43px,13vw,62px);
     line-height:.98;
+  }
+  footer::after{
+    margin-top:16px;
+    padding-top:16px;
+    font-size:7px;
+    letter-spacing:.06em;
   }
 }
 
