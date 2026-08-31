@@ -122,4 +122,18 @@
   window.addEventListener('resize', requestChatPosition, { passive: true });
   window.addEventListener('load', positionFloatingChat);
   positionFloatingChat();
+
+  const seasonal = document.querySelector('.menu-seasonal > div');
+  if (seasonal && !seasonal.querySelector('.menu-seasonal__status')) {
+    const status = document.createElement('p');
+    status.className = 'menu-seasonal__status';
+    status.textContent = 'Menu seasonal belum tersedia saat ini.';
+    status.style.margin = '12px 0 0';
+    status.style.maxWidth = '440px';
+    status.style.fontSize = '12px';
+    status.style.lineHeight = '1.6';
+    status.style.letterSpacing = '.01em';
+    status.style.color = '#bdb2a6';
+    seasonal.appendChild(status);
+  }
 })();
