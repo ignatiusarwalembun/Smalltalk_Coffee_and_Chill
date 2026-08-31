@@ -1,0 +1,14 @@
+{
+  "name": "smalltalk-coffee-and-chill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smalltalk Coffee and Chill premium responsive landing page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
