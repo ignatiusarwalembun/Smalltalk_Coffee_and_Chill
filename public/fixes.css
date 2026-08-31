@@ -4,12 +4,17 @@
 .menu-group:first-of-type .menu-card:nth-child(3) .menu-card__top{
   display:grid;
   grid-template-columns:minmax(0,1fr) max-content;
-  gap:10px;
+  gap:12px;
   align-items:start;
+}
+.menu-group:first-of-type .menu-card:nth-child(3) h4{
+  min-width:0;
+  white-space:nowrap;
 }
 .menu-group:first-of-type .menu-card:nth-child(3) .menu-card__price{
   white-space:nowrap;
   margin-top:0;
+  justify-self:end;
 }
 
 /* 2) Cleaner daily-update Instagram card. */
@@ -249,20 +254,27 @@ body.menu-detail-open{overflow:hidden}
 }
 
 @media(max-width:520px){
+  /* Give LEMONRICANO the full row on narrow screens instead of squeezing name and price. */
+  .menu-group:first-of-type .menu-card:nth-child(3){
+    grid-column:1 / -1;
+  }
+  .menu-group:first-of-type .menu-card:nth-child(3) .menu-card__image{
+    aspect-ratio:16/8.5;
+  }
   .menu-group:first-of-type .menu-card:nth-child(3) .menu-card__top{
     grid-template-columns:minmax(0,1fr) max-content;
-    gap:5px;
-    align-items:start;
+    gap:12px;
+    align-items:center;
   }
   .menu-group:first-of-type .menu-card:nth-child(3) h4{
-    font-size:19px;
-    letter-spacing:-.035em;
+    font-size:23px;
+    letter-spacing:-.02em;
     white-space:nowrap;
   }
   .menu-group:first-of-type .menu-card:nth-child(3) .menu-card__price{
     display:block;
-    margin-top:1px;
-    font-size:17px;
+    margin-top:0;
+    font-size:18px;
   }
 
   .menu-detail-overlay{padding:10px;align-items:end}
