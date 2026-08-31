@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="id">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#191512" />
-  <meta name="description" content="Smalltalk Coffee and Chill — coffee, comfort, conversation in Pademangan, Jakarta Utara." />
+  <meta name="theme-color" content="#f4f0e8" />
+  <meta name="description" content="Smalltalk Coffee and Chill — coffee, comfort and conversation in Pademangan, North Jakarta." />
   <title>Smalltalk Coffee & Chill — Coffee, Calm, Conversation</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,10 +20,10 @@
 
   <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
-  <div class="announcement">
+  <div class="announcement" aria-label="Opening information">
     <div class="announcement__track">
-      <span>OPEN DAILY · 09:30 — 23:00</span><i></i><span>PADEMANGAN · NORTH JAKARTA</span><i></i><span>COFFEE · CALM · CONVERSATION</span><i></i>
-      <span>OPEN DAILY · 09:30 — 23:00</span><i></i><span>PADEMANGAN · NORTH JAKARTA</span><i></i><span>COFFEE · CALM · CONVERSATION</span><i></i>
+      <span data-i18n="announcement.open">OPEN DAILY · 09:30 — 23:00</span><i></i><span data-i18n="announcement.location">PADEMANGAN · NORTH JAKARTA</span><i></i><span data-i18n="announcement.mood">COFFEE · CALM · CONVERSATION</span><i></i>
+      <span data-i18n="announcement.open">OPEN DAILY · 09:30 — 23:00</span><i></i><span data-i18n="announcement.location">PADEMANGAN · NORTH JAKARTA</span><i></i><span data-i18n="announcement.mood">COFFEE · CALM · CONVERSATION</span><i></i>
     </div>
   </div>
 
@@ -34,23 +34,52 @@
     </a>
 
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#story">About</a>
-      <a href="#menu">Menu</a>
-      <a href="#moments">Gallery</a>
-      <a href="#visit">Visit</a>
+      <a href="#story" data-i18n="nav.about">About</a>
+      <a href="#menu" data-i18n="nav.menu">Menu</a>
+      <a href="#moments" data-i18n="nav.gallery">Gallery</a>
+      <a href="#visit" data-i18n="nav.visit">Visit</a>
     </nav>
 
-    <a class="header-cta" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">Instagram <span>↗</span></a>
+    <div class="header-tools">
+      <label class="language-control" aria-label="Language">
+        <span class="language-control__icon">A</span>
+        <select id="languageSelect" aria-label="Language selector">
+          <option value="en">English</option>
+          <option value="id">Indonesia</option>
+          <option value="no">Norsk</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+        </select>
+      </label>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"><span class="theme-toggle__sun">☼</span><span class="theme-toggle__moon">◐</span></button>
+      <a class="header-cta" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">Instagram <span>↗</span></a>
+    </div>
+
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </header>
 
   <div class="mobile-menu" id="mobileMenu">
     <nav>
-      <a href="#story"><span>01</span> About</a>
-      <a href="#menu"><span>02</span> Menu</a>
-      <a href="#moments"><span>03</span> Gallery</a>
-      <a href="#visit"><span>04</span> Visit</a>
+      <a href="#story"><span>01</span><b data-i18n="nav.about">About</b></a>
+      <a href="#menu"><span>02</span><b data-i18n="nav.menu">Menu</b></a>
+      <a href="#moments"><span>03</span><b data-i18n="nav.gallery">Gallery</b></a>
+      <a href="#visit"><span>04</span><b data-i18n="nav.visit">Visit</b></a>
     </nav>
+    <div class="mobile-preferences">
+      <label class="language-control language-control--mobile">
+        <span data-i18n="preferences.language">Language</span>
+        <select id="mobileLanguageSelect" aria-label="Mobile language selector">
+          <option value="en">English</option>
+          <option value="id">Indonesia</option>
+          <option value="no">Norsk</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+        </select>
+      </label>
+      <button class="mobile-theme-toggle" id="mobileThemeToggle" type="button"><span data-i18n="preferences.appearance">Appearance</span><b id="mobileThemeLabel">Dark</b></button>
+    </div>
     <div class="mobile-menu__footer">
       <a href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">Instagram ↗</a>
       <a href="https://wa.me/6285117828229" target="_blank" rel="noreferrer">WhatsApp ↗</a>
@@ -61,189 +90,178 @@
     <section class="hero" id="home">
       <div class="hero__inner">
         <div class="hero__copy">
-          <p class="eyebrow hero-enter">Neighborhood coffee spot · Pademangan</p>
-          <h1 class="hero-enter delay-1">A quiet place<br>for <em>good talk.</em></h1>
-          <p class="hero__lead hero-enter delay-2">Coffee, comfort, and the kind of conversation that makes you forget to check the time.</p>
+          <p class="eyebrow hero-enter" data-i18n="hero.eyebrow">Neighborhood coffee spot · Pademangan</p>
+          <h1 class="hero-enter delay-1"><span data-i18n="hero.titleA">A quiet place</span><br><span data-i18n="hero.titleB">for</span> <em data-i18n="hero.titleEm">good talk.</em></h1>
+          <p class="hero__lead hero-enter delay-2" data-i18n="hero.lead">Coffee, comfort, and the kind of conversation that makes you forget to check the time.</p>
           <div class="hero__actions hero-enter delay-3">
-            <a class="btn btn--dark" href="#menu">Explore menu <span>↘</span></a>
-            <a class="btn btn--light" href="https://www.google.com/maps/place/Smalltalk+Coffee+and+Chill/@-6.134453,106.8443423,394m/data=!3m1!1e3!4m15!1m8!3m7!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!2sSmalltalk+Coffee+and+Chill!8m2!3d-6.1344255!4d106.8442402!10e9!16s%2Fg%2F11ml03y369!3m5!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!8m2!3d-6.1344255!4d106.8442402!16s%2Fg%2F11ml03y369?entry=ttu" target="_blank" rel="noreferrer">Get directions <span>↗</span></a>
+            <a class="btn btn--dark" href="#menu"><span data-i18n="hero.explore">Explore menu</span> <b>↘</b></a>
+            <a class="btn btn--light" href="https://www.google.com/maps/place/Smalltalk+Coffee+and+Chill/@-6.134453,106.8443423,394m/data=!3m1!1e3!4m15!1m8!3m7!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!2sSmalltalk+Coffee+and+Chill!8m2!3d-6.1344255!4d106.8442402!10e9!16s%2Fg%2F11ml03y369!3m5!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!8m2!3d-6.1344255!4d106.8442402!16s%2Fg%2F11ml03y369?entry=ttu" target="_blank" rel="noreferrer"><span data-i18n="hero.directions">Get directions</span> <b>↗</b></a>
           </div>
           <div class="hero__meta hero-enter delay-4">
-            <div><strong>4.8</strong><span>Google rating</span></div>
-            <div><strong>09:30</strong><span>Open daily</span></div>
-            <div><strong>23:00</strong><span>Close daily</span></div>
+            <div><strong>4.8</strong><span data-i18n="hero.rating">Google rating</span></div>
+            <div><strong>09:30</strong><span data-i18n="hero.open">Open daily</span></div>
+            <div><strong>23:00</strong><span data-i18n="hero.close">Close daily</span></div>
           </div>
         </div>
 
         <div class="hero__visual hero-enter delay-2">
           <figure class="hero__image">
             <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=88" alt="Coffee served in a warm cafe" />
-            <figcaption><span>SMALLTALK</span><strong>Your everyday pause.</strong></figcaption>
+            <figcaption><span>SMALLTALK</span><strong data-i18n="hero.pause">Your everyday pause.</strong></figcaption>
           </figure>
           <a class="hero__social" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">
-            <small>Follow the daily mood</small><strong>@smalltalkcoffeechill</strong><span>↗</span>
+            <small data-i18n="hero.followMood">Follow the daily mood</small><strong>@smalltalkcoffeechill</strong><span>↗</span>
           </a>
         </div>
       </div>
-      <a class="hero__scroll" href="#story">Scroll <i></i></a>
+      <a class="hero__scroll" href="#story"><span data-i18n="hero.scroll">Scroll</span><i></i></a>
     </section>
 
     <section class="wordmark-band" aria-label="Smalltalk statement">
       <div class="wordmark-band__track">
-        <span>GOOD COFFEE</span><i>·</i><span>SOFT LIGHT</span><i>·</i><span>LONG TALKS</span><i>·</i><span>SMALLTALK</span><i>·</i>
-        <span>GOOD COFFEE</span><i>·</i><span>SOFT LIGHT</span><i>·</i><span>LONG TALKS</span><i>·</i><span>SMALLTALK</span><i>·</i>
+        <span data-i18n="band.coffee">GOOD COFFEE</span><i>·</i><span data-i18n="band.light">SOFT LIGHT</span><i>·</i><span data-i18n="band.talks">LONG TALKS</span><i>·</i><span>SMALLTALK</span><i>·</i>
+        <span data-i18n="band.coffee">GOOD COFFEE</span><i>·</i><span data-i18n="band.light">SOFT LIGHT</span><i>·</i><span data-i18n="band.talks">LONG TALKS</span><i>·</i><span>SMALLTALK</span><i>·</i>
       </div>
     </section>
 
     <section class="story section" id="story">
-      <div class="section-label" data-reveal><span>01</span> About Smalltalk</div>
+      <div class="section-label" data-reveal><span>01</span><b data-i18n="story.label">About Smalltalk</b></div>
       <div class="story__grid">
-        <div data-reveal>
-          <h2>Designed for people<br>who like to <em>stay awhile.</em></h2>
-        </div>
+        <div data-reveal><h2><span data-i18n="story.titleA">Designed for people</span><br><span data-i18n="story.titleB">who like to</span> <em data-i18n="story.titleEm">stay awhile.</em></h2></div>
         <div class="story__copy" data-reveal data-delay="100">
-          <p>Smalltalk sits between a quick coffee stop and an unofficial second living room — relaxed, familiar, and easy to return to.</p>
-          <p>The visual direction is intentionally quiet: warm neutrals, generous spacing, editorial type, and photography that does most of the talking.</p>
-          <a class="text-link" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">See Smalltalk on Instagram <span>↗</span></a>
+          <p data-i18n="story.p1">Smalltalk sits between a quick coffee stop and an unofficial second living room — relaxed, familiar, and easy to return to.</p>
+          <p data-i18n="story.p2">The visual direction is intentionally quiet: warm neutrals, generous spacing, editorial type, and photography that does most of the talking.</p>
+          <a class="text-link" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer"><span data-i18n="story.instagram">See Smalltalk on Instagram</span><b>↗</b></a>
         </div>
       </div>
 
       <div class="principles">
-        <article class="principle" data-reveal>
-          <span>01</span><h3>Drop in.</h3><p>No big plan required. One cup is enough reason.</p>
-        </article>
-        <article class="principle" data-reveal data-delay="80">
-          <span>02</span><h3>Slow down.</h3><p>A soft pause between the noise of the city.</p>
-        </article>
-        <article class="principle" data-reveal data-delay="160">
-          <span>03</span><h3>Stay longer.</h3><p>Because the best small talks rarely stay small.</p>
-        </article>
+        <article class="principle" data-reveal><span>01</span><h3 data-i18n="principles.oneTitle">Drop in.</h3><p data-i18n="principles.oneText">No big plan required. One cup is enough reason.</p></article>
+        <article class="principle" data-reveal data-delay="80"><span>02</span><h3 data-i18n="principles.twoTitle">Slow down.</h3><p data-i18n="principles.twoText">A soft pause between the noise of the city.</p></article>
+        <article class="principle" data-reveal data-delay="160"><span>03</span><h3 data-i18n="principles.threeTitle">Stay longer.</h3><p data-i18n="principles.threeText">Because the best small talks rarely stay small.</p></article>
       </div>
     </section>
 
     <section class="menu-section" id="menu">
       <div class="menu-intro section">
         <div data-reveal>
-          <div class="section-label section-label--light"><span>02</span> Menu preview</div>
-          <h2>Pick a reason<br>to <em>stay longer.</em></h2>
+          <div class="section-label section-label--light"><span>02</span><b data-i18n="menu.label">Menu preview</b></div>
+          <h2><span data-i18n="menu.titleA">Pick a reason</span><br><span data-i18n="menu.titleB">to</span> <em data-i18n="menu.titleEm">stay longer.</em></h2>
         </div>
         <div class="menu-intro__note" data-reveal data-delay="100">
-          <p>This is a visual menu preview. Official items and prices can replace the demo catalog when the latest café menu is available.</p>
-          <a class="text-link text-link--light" href="https://wa.me/6285117828229?text=Halo%20Smalltalk%2C%20boleh%20minta%20menu%20terbaru%3F" target="_blank" rel="noreferrer">Ask for latest menu <span>↗</span></a>
+          <p data-i18n="menu.note">This is a visual menu preview. Official items and prices can replace the demo catalog when the latest café menu is available.</p>
+          <a class="text-link text-link--light" href="https://wa.me/6285117828229?text=Halo%20Smalltalk%2C%20boleh%20minta%20menu%20terbaru%3F" target="_blank" rel="noreferrer"><span data-i18n="menu.ask">Ask for latest menu</span><b>↗</b></a>
         </div>
       </div>
 
       <div class="menu-toolbar">
         <div class="filter-group" data-reveal>
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="coffee">Coffee</button>
-          <button class="filter-btn" data-filter="non-coffee">Non coffee</button>
-          <button class="filter-btn" data-filter="bites">Bites</button>
+          <button class="filter-btn active" data-filter="all" data-i18n="filters.all">All</button>
+          <button class="filter-btn" data-filter="coffee" data-i18n="filters.coffee">Coffee</button>
+          <button class="filter-btn" data-filter="non-coffee" data-i18n="filters.nonCoffee">Non coffee</button>
+          <button class="filter-btn" data-filter="bites" data-i18n="filters.bites">Bites</button>
         </div>
-        <label class="search-box" data-reveal data-delay="80"><span>⌕</span><input id="menuSearch" type="search" placeholder="Search menu preview" /></label>
+        <label class="search-box" data-reveal data-delay="80"><span>⌕</span><input id="menuSearch" type="search" data-i18n-placeholder="menu.search" placeholder="Search menu preview" /></label>
       </div>
 
       <div class="menu-grid" id="menuGrid">
         <article class="menu-card" data-category="coffee" data-name="smalltalk house latte" data-reveal>
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=84" alt="Iced coffee" /><span>DEMO</span></div>
-          <div class="menu-card__body"><small>COFFEE · 01</small><h3>Smalltalk House Latte</h3><p>Soft espresso character, creamy texture, easy everyday profile.</p><strong>Ask latest price</strong></div>
+          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=84" alt="Iced coffee" /><span data-i18n="menu.demo">DEMO</span></div>
+          <div class="menu-card__body"><small>COFFEE · 01</small><h3>Smalltalk House Latte</h3><p data-i18n="items.latte">Soft espresso character, creamy texture, easy everyday profile.</p><strong data-i18n="menu.price">Ask latest price</strong></div>
         </article>
         <article class="menu-card" data-category="coffee" data-name="brown sugar iced coffee" data-reveal data-delay="70">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=84" alt="Brown sugar iced coffee" /><span>DEMO</span></div>
-          <div class="menu-card__body"><small>COFFEE · 02</small><h3>Brown Sugar Iced Coffee</h3><p>Cold, smooth and caramel-forward for a hot Jakarta afternoon.</p><strong>Ask latest price</strong></div>
+          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=84" alt="Brown sugar iced coffee" /><span data-i18n="menu.demo">DEMO</span></div>
+          <div class="menu-card__body"><small>COFFEE · 02</small><h3>Brown Sugar Iced Coffee</h3><p data-i18n="items.brownSugar">Cold, smooth and caramel-forward for a hot Jakarta afternoon.</p><strong data-i18n="menu.price">Ask latest price</strong></div>
         </article>
         <article class="menu-card" data-category="non-coffee" data-name="matcha cloud" data-reveal data-delay="140">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=84" alt="Matcha drink" /><span>DEMO</span></div>
-          <div class="menu-card__body"><small>NON COFFEE · 03</small><h3>Matcha Cloud</h3><p>Earthy matcha, soft milk and an easy clean finish.</p><strong>Ask latest price</strong></div>
+          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=84" alt="Matcha drink" /><span data-i18n="menu.demo">DEMO</span></div>
+          <div class="menu-card__body"><small>NON COFFEE · 03</small><h3>Matcha Cloud</h3><p data-i18n="items.matcha">Earthy matcha, soft milk and an easy clean finish.</p><strong data-i18n="menu.price">Ask latest price</strong></div>
         </article>
         <article class="menu-card" data-category="non-coffee" data-name="chocolate cream" data-reveal>
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=900&q=84" alt="Chocolate drink" /><span>DEMO</span></div>
-          <div class="menu-card__body"><small>NON COFFEE · 04</small><h3>Chocolate Cream</h3><p>Comfort-first chocolate with a smooth, velvety mouthfeel.</p><strong>Ask latest price</strong></div>
+          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=900&q=84" alt="Chocolate drink" /><span data-i18n="menu.demo">DEMO</span></div>
+          <div class="menu-card__body"><small>NON COFFEE · 04</small><h3>Chocolate Cream</h3><p data-i18n="items.chocolate">Comfort-first chocolate with a smooth, velvety mouthfeel.</p><strong data-i18n="menu.price">Ask latest price</strong></div>
         </article>
         <article class="menu-card" data-category="bites" data-name="butter croffle" data-reveal data-delay="70">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=84" alt="Pastry" /><span>DEMO</span></div>
-          <div class="menu-card__body"><small>BITES · 05</small><h3>Butter Croffle</h3><p>Crisp edges and buttery layers made to sit beside an iced coffee.</p><strong>Ask latest price</strong></div>
+          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=84" alt="Pastry" /><span data-i18n="menu.demo">DEMO</span></div>
+          <div class="menu-card__body"><small>BITES · 05</small><h3>Butter Croffle</h3><p data-i18n="items.croffle">Crisp edges and buttery layers made to sit beside an iced coffee.</p><strong data-i18n="menu.price">Ask latest price</strong></div>
         </article>
         <article class="menu-card" data-category="bites" data-name="savory toast" data-reveal data-delay="140">
-          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=84" alt="Toast" /><span>DEMO</span></div>
-          <div class="menu-card__body"><small>BITES · 06</small><h3>Savory Toast</h3><p>Simple café comfort food for longer conversations and work sessions.</p><strong>Ask latest price</strong></div>
+          <div class="menu-card__image"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=84" alt="Toast" /><span data-i18n="menu.demo">DEMO</span></div>
+          <div class="menu-card__body"><small>BITES · 06</small><h3>Savory Toast</h3><p data-i18n="items.toast">Simple café comfort food for longer conversations and work sessions.</p><strong data-i18n="menu.price">Ask latest price</strong></div>
         </article>
       </div>
-      <div class="empty-state" id="emptyState">No menu preview matched that search.</div>
+      <div class="empty-state" id="emptyState" data-i18n="menu.empty">No menu preview matched that search.</div>
     </section>
 
     <section class="moments section" id="moments">
       <div class="moments__head">
-        <div data-reveal>
-          <div class="section-label"><span>03</span> Smalltalk moments</div>
-          <h2>A café should feel<br>as good as it <em>looks.</em></h2>
-        </div>
-        <p data-reveal data-delay="100">A quieter gallery inspired by the pace of the café: space, coffee, details, people.</p>
+        <div data-reveal><div class="section-label"><span>03</span><b data-i18n="moments.label">Smalltalk moments</b></div><h2><span data-i18n="moments.titleA">A café should feel</span><br><span data-i18n="moments.titleB">as good as it</span> <em data-i18n="moments.titleEm">looks.</em></h2></div>
+        <p data-reveal data-delay="100" data-i18n="moments.note">A quieter gallery inspired by the pace of the café: space, coffee, details, people.</p>
       </div>
 
       <div class="moments-grid">
         <a class="moment moment--large" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer" data-reveal>
           <img data-parallax-image src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=86" alt="Warm cafe interior" />
-          <span><small>THE SPACE</small><strong>Slow down here.</strong></span>
+          <span><small data-i18n="moments.spaceLabel">THE SPACE</small><strong data-i18n="moments.spaceText">Slow down here.</strong></span>
         </a>
         <a class="moment" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer" data-reveal data-delay="80">
           <img data-parallax-image src="https://images.unsplash.com/photo-1511081692775-05d0f180a065?auto=format&fit=crop&w=900&q=86" alt="Coffee preparation" />
-          <span><small>THE POUR</small><strong>Fresh, then slow.</strong></span>
+          <span><small data-i18n="moments.pourLabel">THE POUR</small><strong data-i18n="moments.pourText">Fresh, then slow.</strong></span>
         </a>
         <a class="moment moment--text" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer" data-reveal data-delay="140">
-          <small>@SMALLTALKCOFFEECHILL</small><strong>Good coffee.<br>Soft light.<br>Stay awhile.</strong><span>↗</span>
+          <small>@SMALLTALKCOFFEECHILL</small><strong><span data-i18n="moments.textA">Good coffee.</span><br><span data-i18n="moments.textB">Soft light.</span><br><span data-i18n="moments.textC">Stay awhile.</span></strong><span>↗</span>
         </a>
         <a class="moment moment--wide" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer" data-reveal>
           <img data-parallax-image src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1400&q=86" alt="Friends sharing coffee" />
-          <span><small>THE TALK</small><strong>Come for coffee. Stay for the story.</strong></span>
+          <span><small data-i18n="moments.talkLabel">THE TALK</small><strong data-i18n="moments.talkText">Come for coffee. Stay for the story.</strong></span>
         </a>
       </div>
 
       <div class="instagram-row" data-reveal>
-        <p>More daily moments on Instagram.</p>
-        <a class="btn btn--dark" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">Follow @smalltalkcoffeechill <span>↗</span></a>
+        <p data-i18n="moments.instagram">More daily moments on Instagram.</p>
+        <a class="btn btn--dark" href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer"><span data-i18n="moments.follow">Follow @smalltalkcoffeechill</span><b>↗</b></a>
       </div>
     </section>
 
     <section class="visit" id="visit">
       <div class="visit__inner">
         <div class="visit__copy" data-reveal>
-          <div class="section-label section-label--light"><span>04</span> Visit Smalltalk</div>
-          <h2>Your next coffee<br>is <em>right here.</em></h2>
+          <div class="section-label section-label--light"><span>04</span><b data-i18n="visit.label">Visit Smalltalk</b></div>
+          <h2><span data-i18n="visit.titleA">Your next coffee</span><br><span data-i18n="visit.titleB">is</span> <em data-i18n="visit.titleEm">right here.</em></h2>
           <div class="visit__details">
-            <div><small>ADDRESS</small><p>Jl. Pademangan 3 Raya No.6C, RT.18/RW.2, Pademangan Timur, Jakarta Utara 14410</p></div>
-            <div><small>OPEN DAILY</small><p>09:30 — 23:00</p></div>
-            <div><small>CONTACT</small><p><a href="tel:+6285117828229">+62 851-1782-8229</a></p></div>
+            <div><small data-i18n="visit.address">ADDRESS</small><p>Jl. Pademangan 3 Raya No.6C, RT.18/RW.2, Pademangan Timur, Jakarta Utara 14410</p></div>
+            <div><small data-i18n="visit.hours">OPEN DAILY</small><p>09:30 — 23:00</p></div>
+            <div><small data-i18n="visit.contact">CONTACT</small><p><a href="tel:+6285117828229">+62 851-1782-8229</a></p></div>
           </div>
           <div class="visit__actions">
-            <a class="btn btn--cream" href="https://www.google.com/maps/place/Smalltalk+Coffee+and+Chill/@-6.134453,106.8443423,394m/data=!3m1!1e3!4m15!1m8!3m7!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!2sSmalltalk+Coffee+and+Chill!8m2!3d-6.1344255!4d106.8442402!10e9!16s%2Fg%2F11ml03y369!3m5!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!8m2!3d-6.1344255!4d106.8442402!16s%2Fg%2F11ml03y369?entry=ttu" target="_blank" rel="noreferrer">Open Google Maps <span>↗</span></a>
-            <a class="btn btn--outline" href="https://wa.me/6285117828229" target="_blank" rel="noreferrer">WhatsApp <span>↗</span></a>
+            <a class="btn btn--cream" href="https://www.google.com/maps/place/Smalltalk+Coffee+and+Chill/@-6.134453,106.8443423,394m/data=!3m1!1e3!4m15!1m8!3m7!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!2sSmalltalk+Coffee+and+Chill!8m2!3d-6.1344255!4d106.8442402!10e9!16s%2Fg%2F11ml03y369!3m5!1s0x2e6a1f1e052e864b:0xd33012c8b8a7b4dd!8m2!3d-6.1344255!4d106.8442402!16s%2Fg%2F11ml03y369?entry=ttu" target="_blank" rel="noreferrer"><span data-i18n="visit.maps">Open Google Maps</span><b>↗</b></a>
+            <a class="btn btn--outline" href="https://wa.me/6285117828229" target="_blank" rel="noreferrer">WhatsApp <b>↗</b></a>
           </div>
         </div>
 
         <div class="visit-card" data-reveal data-delay="100">
           <div class="visit-card__image"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=86" alt="Warm coffee shop interior" /></div>
-          <div class="visit-card__meta"><strong>4.8 ★</strong><span>Google rating · Pademangan</span></div>
+          <div class="visit-card__meta"><strong>4.8 ★</strong><span data-i18n="visit.rating">Google rating · Pademangan</span></div>
         </div>
       </div>
     </section>
 
     <section class="closing">
       <div class="closing__inner" data-reveal>
-        <small>ONE CUP · ONE TABLE · ONE GOOD TALK</small>
-        <h2>See you at<br><em>Smalltalk.</em></h2>
-        <a class="closing__button" href="https://wa.me/6285117828229" target="_blank" rel="noreferrer">Start a small talk <span>↗</span></a>
+        <small data-i18n="closing.kicker">ONE CUP · ONE TABLE · ONE GOOD TALK</small>
+        <h2><span data-i18n="closing.titleA">See you at</span><br><em>Smalltalk.</em></h2>
+        <a class="closing__button" href="https://wa.me/6285117828229" target="_blank" rel="noreferrer"><span data-i18n="closing.cta">Start a small talk</span><b>↗</b></a>
       </div>
     </section>
   </main>
 
   <footer>
     <a class="brand" href="#home"><span class="brand__mark">S</span><span class="brand__copy"><strong>SMALLTALK</strong><small>coffee & chill</small></span></a>
-    <p>Smalltalk Coffee & Chill · Pademangan, North Jakarta</p>
-    <div><a href="#menu">Menu</a><a href="#visit">Location</a><a href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">Instagram ↗</a></div>
+    <p data-i18n="footer.location">Smalltalk Coffee & Chill · Pademangan, North Jakarta</p>
+    <div><a href="#menu" data-i18n="nav.menu">Menu</a><a href="#visit" data-i18n="footer.locationLink">Location</a><a href="https://www.instagram.com/smalltalkcoffeechill/" target="_blank" rel="noreferrer">Instagram ↗</a></div>
   </footer>
 
-  <a class="floating-chat" href="https://wa.me/6285117828229" target="_blank" rel="noreferrer" aria-label="Chat Smalltalk on WhatsApp"><span>CHAT</span><b>↗</b></a>
+  <a class="floating-chat" href="https://wa.me/6285117828229" target="_blank" rel="noreferrer" aria-label="Chat Smalltalk on WhatsApp"><span data-i18n="floating.chat">CHAT</span><b>↗</b></a>
   <script src="/app.js" defer></script>
 </body>
 </html>
