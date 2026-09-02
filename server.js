@@ -4,6 +4,8 @@ const path = require('path');
 
 const port = process.env.PORT || 3000;
 const publicDir = path.join(__dirname, 'public');
+const operationsFile = path.join(__dirname, 'operations', 'index.html');
+const newsDataUrl = 'https://raw.githubusercontent.com/ignatiusarwalembun/Smalltalk_Coffee_and_Chill/news-data/data/news.json';
 
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8',
@@ -28,17 +30,73 @@ const place = {
   priceRange: 'Rp1–25K'
 };
 
-const server = http.createServer((req, res) => {
+function sendJson(res, status, payload, extraHeaders = {}) {
+  res.writeHead(status, {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Access-Control-Allow-Origin': '*',
+    'Cache-Control': 'no-store',
+    ...extraHeaders
+  });
+  res.end(JSON.stringify(payload));
+}
+
+async function getNews() {
+  const response = await fetch(`${newsDataUrl}?v=${Date.now()}`, {
+    headers: { 'User-Agent': 'smalltalk-coffee-and-chill' },
+    cache: 'no-store'
+  });
+
+  if (!response.ok) throw new Error(`News source responded ${response.status}`);
+  const parsed = await response.json();
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed
+    .filter(item => item && typeof item === 'object' && typeof item.title === 'string')
+    .slice(0, 50);
+}
+
+const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
 
   if (requestUrl.pathname === '/api/health') {
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify({ ok: true, service: 'smalltalk-coffee-and-chill' }));
+    return sendJson(res, 200, { ok: true, service: 'smalltalk-coffee-and-chill' });
   }
 
   if (requestUrl.pathname === '/api/place') {
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify(place));
+    return sendJson(res, 200, place);
+  }
+
+  if (requestUrl.pathname === '/api/news') {
+    if (req.method !== 'GET') {
+      return sendJson(res, 405, { ok: false, error: 'Method not allowed' }, { Allow: 'GET' });
+    }
+
+    try {
+      const news = await getNews();
+      return sendJson(res, 200, { ok: true, news });
+    } catch (error) {
+      console.error('Unable to load news:', error.message);
+      return sendJson(res, 200, { ok: true, news: [], degraded: true });
+    }
+  }
+
+  if (requestUrl.pathname === '/operations' || requestUrl.pathname === '/operations/') {
+    fs.readFile(operationsFile, (err, content) => {
+      if (err) {
+        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end('Operations page not found');
+      }
+
+      res.writeHead(200, {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+        'X-Frame-Options': 'DENY',
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'no-referrer'
+      });
+      return res.end(content);
+    });
+    return;
   }
 
   let filePath = path.join(publicDir, requestUrl.pathname === '/' ? 'index.html' : requestUrl.pathname);
