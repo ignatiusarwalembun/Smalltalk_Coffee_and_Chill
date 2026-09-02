@@ -36,7 +36,7 @@ function sendJson(res, status, payload, extraHeaders = {}) {
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, X-API-Key',
     'Cache-Control': 'no-store',
     ...extraHeaders
@@ -137,7 +137,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS' && requestUrl.pathname.startsWith('/api/')) {
     res.writeHead(204, {
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, X-API-Key',
       'Access-Control-Max-Age': '86400'
     });
@@ -196,20 +196,52 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 405, { ok: false, error: 'Method not allowed' }, { Allow: 'GET, POST' });
   }
 
-  if (requestUrl.pathname.startsWith('/api/news/') && req.method === 'DELETE') {
-    if (!requireApiKey(req, res)) return;
+  if (requestUrl.pathname.startsWith('/api/news/')) {
     const id = decodeURIComponent(requestUrl.pathname.slice('/api/news/'.length)).trim();
     if (!id) return sendJson(res, 400, { ok: false, error: 'Missing news id' });
 
-    try {
-      const news = await readNews();
-      const filtered = news.filter(item => item && item.id !== id);
-      if (filtered.length === news.length) return sendJson(res, 404, { ok: false, error: 'News not found' });
-      await writeNews(filtered);
-      return sendJson(res, 200, { ok: true });
-    } catch (error) {
-      return sendJson(res, 500, { ok: false, error: 'Unable to delete news' });
+    if (req.method === 'PUT') {
+      if (!requireApiKey(req, res)) return;
+      try {
+        const body = await readJsonBody(req);
+        const input = validateNewsInput(body);
+        if (input.error) return sendJson(res, 400, { ok: false, error: input.error });
+
+        const news = await readNews();
+        const index = news.findIndex(item => item && item.id === id);
+        if (index === -1) return sendJson(res, 404, { ok: false, error: 'News not found' });
+
+        const existing = news[index];
+        const updated = {
+          ...existing,
+          title: input.title,
+          content: input.content,
+          link: input.link,
+          editedAt: new Date().toISOString()
+        };
+        news[index] = updated;
+        await writeNews(news);
+        return sendJson(res, 200, { ok: true, item: updated });
+      } catch (error) {
+        const status = error.message === 'Payload too large' ? 413 : 400;
+        return sendJson(res, status, { ok: false, error: error.message || 'Unable to edit news' });
+      }
     }
+
+    if (req.method === 'DELETE') {
+      if (!requireApiKey(req, res)) return;
+      try {
+        const news = await readNews();
+        const filtered = news.filter(item => item && item.id !== id);
+        if (filtered.length === news.length) return sendJson(res, 404, { ok: false, error: 'News not found' });
+        await writeNews(filtered);
+        return sendJson(res, 200, { ok: true });
+      } catch (error) {
+        return sendJson(res, 500, { ok: false, error: 'Unable to delete news' });
+      }
+    }
+
+    return sendJson(res, 405, { ok: false, error: 'Method not allowed' }, { Allow: 'PUT, DELETE' });
   }
 
   if (requestUrl.pathname === '/operations' || requestUrl.pathname === '/operations/') {
