@@ -136,4 +136,146 @@
     status.style.color = '#bdb2a6';
     seasonal.appendChild(status);
   }
+
+  /* 7) Public news feed — injected directly below GOOD COFFEE · CALM SPACE · GOOD COMPANY. */
+  const NEWS_API = 'https://smalltalk-coffee-and-chill-production.up.railway.app/api/news';
+  const newsCopy = {
+    en: { eyebrow: 'LATEST FROM SMALLTALK', title: 'News & updates.', empty: 'No new updates at the moment.', error: 'Latest updates are temporarily unavailable.', read: 'Read more' },
+    id: { eyebrow: 'KABAR DARI SMALLTALK', title: 'News & update.', empty: 'Belum ada kabar terbaru saat ini.', error: 'Kabar terbaru sedang tidak dapat dimuat.', read: 'Selengkapnya' },
+    no: { eyebrow: 'SISTE FRA SMALLTALK', title: 'Nyheter & oppdateringer.', empty: 'Ingen nye oppdateringer akkurat nå.', error: 'De siste oppdateringene er midlertidig utilgjengelige.', read: 'Les mer' },
+    zh: { eyebrow: 'SMALLTALK 最新消息', title: '新闻与动态。', empty: '目前暂无最新动态。', error: '暂时无法加载最新动态。', read: '了解更多' },
+    ja: { eyebrow: 'SMALLTALK 最新情報', title: 'ニュース & アップデート。', empty: '現在、新しいお知らせはありません。', error: '最新情報を一時的に読み込めません。', read: '詳しく見る' },
+    ko: { eyebrow: 'SMALLTALK 최신 소식', title: '뉴스 & 업데이트.', empty: '현재 새로운 소식이 없습니다.', error: '최신 소식을 일시적으로 불러올 수 없습니다.', read: '더 보기' }
+  };
+  const localeMap = { en: 'en-US', id: 'id-ID', no: 'nb-NO', zh: 'zh-CN', ja: 'ja-JP', ko: 'ko-KR' };
+  let latestNews = [];
+  let newsLoadState = 'loading';
+
+  function newsStrings() {
+    const lang = document.documentElement.lang || 'en';
+    return newsCopy[lang] || newsCopy.en;
+  }
+
+  function buildNewsSection() {
+    const statement = document.querySelector('.statement');
+    if (!statement || document.querySelector('.news-feed-section')) return null;
+    const section = document.createElement('section');
+    section.className = 'news-feed-section';
+    section.setAttribute('aria-label', 'Smalltalk news and updates');
+    section.innerHTML = `
+      <div class="news-feed__head">
+        <div>
+          <small class="news-feed__eyebrow"></small>
+          <h2 class="news-feed__title"></h2>
+        </div>
+        <span class="news-feed__live"><i></i>LIVE</span>
+      </div>
+      <div class="news-feed__grid" aria-live="polite"></div>`;
+    statement.insertAdjacentElement('afterend', section);
+    return section;
+  }
+
+  const newsSection = buildNewsSection();
+
+  function formatNewsDate(value) {
+    if (!value) return '';
+    const lang = document.documentElement.lang || 'en';
+    try {
+      return new Intl.DateTimeFormat(localeMap[lang] || 'en-US', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value));
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function renderNews() {
+    if (!newsSection) return;
+    const strings = newsStrings();
+    newsSection.querySelector('.news-feed__eyebrow').textContent = strings.eyebrow;
+    newsSection.querySelector('.news-feed__title').textContent = strings.title;
+    const grid = newsSection.querySelector('.news-feed__grid');
+    grid.innerHTML = '';
+
+    if (newsLoadState === 'loading') {
+      for (let i = 0; i < 3; i += 1) {
+        const skeleton = document.createElement('div');
+        skeleton.className = 'news-card news-card--skeleton';
+        skeleton.innerHTML = '<span></span><b></b><p></p><p></p>';
+        grid.appendChild(skeleton);
+      }
+      return;
+    }
+
+    if (newsLoadState === 'error') {
+      const state = document.createElement('div');
+      state.className = 'news-feed__state';
+      state.textContent = strings.error;
+      grid.appendChild(state);
+      return;
+    }
+
+    if (!latestNews.length) {
+      const state = document.createElement('div');
+      state.className = 'news-feed__state';
+      state.textContent = strings.empty;
+      grid.appendChild(state);
+      return;
+    }
+
+    latestNews.forEach((item, index) => {
+      const article = document.createElement('article');
+      article.className = 'news-card';
+
+      const meta = document.createElement('div');
+      meta.className = 'news-card__meta';
+      const number = document.createElement('span');
+      number.textContent = String(index + 1).padStart(2, '0');
+      const date = document.createElement('time');
+      date.dateTime = item.publishedAt || '';
+      date.textContent = formatNewsDate(item.publishedAt);
+      meta.append(number, date);
+
+      const title = document.createElement('h3');
+      title.textContent = item.title || '';
+      const body = document.createElement('p');
+      body.textContent = item.content || '';
+      article.append(meta, title, body);
+
+      if (item.link) {
+        const link = document.createElement('a');
+        link.className = 'news-card__link';
+        link.href = item.link;
+        link.target = '_blank';
+        link.rel = 'noreferrer';
+        link.innerHTML = `<span>${strings.read}</span><b>↗</b>`;
+        article.appendChild(link);
+      }
+      grid.appendChild(article);
+    });
+  }
+
+  async function loadPublicNews() {
+    if (!newsSection) return;
+    newsLoadState = 'loading';
+    renderNews();
+    try {
+      const response = await fetch(`${NEWS_API}?v=${Date.now()}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const payload = await response.json();
+      latestNews = Array.isArray(payload.news) ? payload.news.slice(0, 6) : [];
+      newsLoadState = 'ready';
+    } catch (_) {
+      latestNews = [];
+      newsLoadState = 'error';
+    }
+    renderNews();
+  }
+
+  if (newsSection) {
+    renderNews();
+    loadPublicNews();
+    const languageObserver = new MutationObserver(records => {
+      if (records.some(record => record.attributeName === 'lang')) renderNews();
+    });
+    languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
 })();
