@@ -4,6 +4,9 @@
   const footer = document.querySelector('footer');
   let lastTrigger = null;
 
+  const priceRangeFact = document.querySelector('.hero__facts [data-i18n="hero.price"]')?.closest('div');
+  priceRangeFact?.remove();
+
   const copy = {
     en: { label: 'MENU DETAIL', close: 'Close menu detail', noDescription: 'A detailed description is not listed on Smalltalk’s current menu.', source: 'Smalltalk Coffee & Chill · Current menu' },
     id: { label: 'DETAIL MENU', close: 'Tutup detail menu', noDescription: 'Deskripsi detail belum tercantum pada menu Smalltalk saat ini.', source: 'Smalltalk Coffee & Chill · Menu saat ini' },
